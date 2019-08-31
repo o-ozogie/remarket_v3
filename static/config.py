@@ -11,7 +11,7 @@ class LocalAppConfig:
 
 class AWSAppConfig:
     HOST = '0.0.0.0'
-    PORT = 800
+    PORT = 80
     DEBUG = False
     RUN_SETTINGS = {
         'host': HOST,
