@@ -14,8 +14,8 @@ class Mypage(Resource):
         except KeyError or TypeError:
             return {'msg': 'valueless'}, 400
 
-        query_select_user_info = 'select tel, name, profile_img, point, (select title, main_img, item_id from item where status = %s) from user where uuid = %s'
-        curs.execute(query_select_user_info, uuid)
+        query_select_user_info = 'select tel, name, profile_img, point, (select title, main_img, item_id from item where status = %s) as list from user where uuid = %s'
+        curs.execute(query_select_user_info, (uuid, uuid))
         user_info = curs.fetchone()
 
         return user_info
