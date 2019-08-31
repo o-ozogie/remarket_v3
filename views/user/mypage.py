@@ -76,3 +76,16 @@ class Mypage(Resource):
         conn.commit()
 
         return {'msg': 'success'}, 200
+
+    def delete(self):
+        try:
+            uuid = request.json['uuid']
+            item_id = request.json['item_id']
+        except KeyError or TypeError:
+            return {'msg': 'valueless'}, 400
+
+        query_update_item_info = 'update item set status = -1 where item_id = %s and uuid = %s'
+        curs.execute(query_update_item_info, (item_id, uuid))
+        conn.commit()
+
+        return {'msg': 'success'}, 200

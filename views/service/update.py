@@ -10,8 +10,8 @@ api = Api(Blueprint(__name__, __name__))
 class Update(Resource):
     def update(self):
         try:
-            uuid = request.args['uuid']
-            item_id = request.args['item_id']
+            uuid = request.json['uuid']
+            item_id = request.json['item_id']
         except KeyError or TypeError:
             return {'msg': 'valueless'}, 400
 

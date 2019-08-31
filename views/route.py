@@ -12,5 +12,6 @@ class Route:
         app.register_blueprint(list.api.blueprint)
         app.register_blueprint(update.api.blueprint)
 
-        from views.admin import upload
+        from views.admin import upload, patch
         app.register_blueprint(upload.api.blueprint)
+        app.register_blueprint(patch.api.blueprint)

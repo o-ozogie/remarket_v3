@@ -5,6 +5,7 @@ import time
 from DB import curs, conn
 
 api = Api(Blueprint(__name__, __name__))
+api.prefix = '/admin'
 
 
 @api.resource('/upload')
@@ -18,6 +19,7 @@ class Upload(Resource):
             main_img = request.json['main_img']
             buy_time = request.json['buy_time']
             permission = request.json['permission']
+
         except KeyError or TypeError:
             return {'msg': 'valueless'}, 400
 
