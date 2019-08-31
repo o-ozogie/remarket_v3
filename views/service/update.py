@@ -8,7 +8,7 @@ api = Api(Blueprint(__name__, __name__))
 
 @api.resource('/update')
 class Update(Resource):
-    def update(self):
+    def post(self):
         try:
             uuid = request.json['uuid']
             item_id = request.json['item_id']
