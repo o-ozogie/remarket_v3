@@ -31,7 +31,7 @@ class Upload(Resource):
             return {'msg': 'permission_denied'}, 403
 
         query_insert_item_info = 'insert into item (uuid, title, cate, loc, point, main_img, buy_time, write_time) ' \
-                                 f'values ({uuid}, {title}, {cate}, {loc}, {point}, {main_img}, {buy_time}, {datetime.datetime.now()})'
+                                 f"values ({uuid}, '{title}', '{cate}', '{loc}', {point}, '{main_img}', '{buy_time}', '{datetime.datetime.now()}')"
         curs.execute(query_insert_item_info)
 
         query_update_user_info = f'update user set point = point + {point} where uuid = {uuid}'
