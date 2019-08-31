@@ -52,13 +52,13 @@ class Mypage(Resource):
         query_update_user_info = 'update user set '
 
         if name:
-            query_update_user_info += f'name = {name}, '
+            query_update_user_info += f"name = '{name}', "
 
         if change_pw:
-            query_update_user_info += f'change_pw = {change_pw}, '
+            query_update_user_info += f"change_pw = '{change_pw}', "
 
         if profile_img:
-            query_update_user_info += f'profile_img = {profile_img}, '
+            query_update_user_info += f"profile_img = '{profile_img}', "
 
         query_update_user_info = query_update_user_info[:-2] + ' where uuid = %s'
         curs.execute(query_update_user_info, uuid)
