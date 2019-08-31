@@ -14,11 +14,22 @@ class Mypage(Resource):
         except KeyError or TypeError:
             return {'msg': 'valueless'}, 400
 
-        query_select_user_info = 'select tel, name, profile_img, point, (select title, main_img, item_id from item where status = %s) as list from user where uuid = %s'
-        curs.execute(query_select_user_info, (uuid, uuid))
+        query_select_user_info = 'select tel, name, profile_img, point from user where uuid = %s'
+        curs.execute(query_select_user_info, uuid)
         user_info = curs.fetchone()
 
-        return user_info
+        query_select_item_info = 'select title, main_img, item_id from item where status = %s'
+        curs.execute(query_select_item_info, uuid)
+        item_infos = curs.fetchall()
+
+        refined_item_infos = {}
+
+        cnt = 0
+        for item_info in item_infos:
+            refined_item_infos[cnt] = item_info
+            cnt += 1
+
+        return {'user_info': user_info, 'list': refined_item_infos}
 
     def patch(self):
         try:
