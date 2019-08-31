@@ -77,7 +77,7 @@ class Mypage(Resource):
 
         return {'msg': 'success'}, 200
 
-    def delete(self):
+    def post(self):
         try:
             uuid = request.json['uuid']
             item_id = request.json['item_id']
