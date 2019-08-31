@@ -9,7 +9,7 @@ api.prefix = '/admin'
 
 @api.resource('/patch')
 class Patch(Resource):
-    def patch(self):
+    def post(self):
         try:
             permission = request.json['permission']
             item_id = request.json['item_id']
