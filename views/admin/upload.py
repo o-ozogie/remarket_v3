@@ -1,6 +1,7 @@
+import datetime
+
 from flask import Blueprint, request
 from flask_restful import Api, Resource
-import time
 
 from DB import curs, conn
 
@@ -16,6 +17,7 @@ class Upload(Resource):
             title = request.json['title']
             cate = request.json['cate']
             loc = request.json['loc']
+            point = request.json['point']
             main_img = request.json['main_img']
             buy_time = request.json['buy_time']
             permission = request.json['permission']
@@ -23,14 +25,18 @@ class Upload(Resource):
         except KeyError or TypeError:
             return {'msg': 'valueless'}, 400
 
+        buy_time = datetime.datetime.strptime(buy_time, '%Y-%m-%d')
+
         if permission != 9:
             return {'msg': 'permission_denied'}, 403
 
-        buy_time = time.mktime(time.strftime(buy_time, '%Y-%m-%d'))
+        query_insert_item_info = 'insert into item (uuid, title, cate, loc, point, main_img, buy_time, write_time) ' \
+                                 f'values ({uuid}, {title}, {cate}, {loc}, {point}, {main_img}, {buy_time}, {datetime.datetime.now()})'
+        curs.execute(query_insert_item_info)
 
-        query_insert_item_info = 'insert into item (uuid, title, cate, loc, main_img, buy_time, write_time) ' \
-                                 'values (%s, %s, %s, %s, %s, %s, )'
-        curs.execute(query_insert_item_info, (uuid, title, cate, loc, main_img, buy_time, time.time()))
+        query_update_user_info = f'update user set point = point + {point} where uuid = {uuid}'
+        curs.execute(query_update_user_info)
+
         conn.commit()
 
         return {'msg': 'success'}, 200
