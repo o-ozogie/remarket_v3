@@ -10,7 +10,7 @@ api = Api(Blueprint(__name__, __name__))
 class Mypage(Resource):
     def get(self):
         try:
-            uuid = request.json['uuid']
+            uuid = request.args['uuid']
         except KeyError or TypeError:
             return {'msg': 'valueless'}, 400
 

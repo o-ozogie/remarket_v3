@@ -16,7 +16,8 @@ class List(Resource):
 
         query_select_item_info = 'select item_id, uuid as u, (select name from user where uuid = u), ' \
                                  'title, cate, loc, main_img, buy_time, write_time, status' \
-                                 ' from item where title like %'+title+'% or cate like %'+title+'% order by write_time desc'
+                                 f" from item where title like '%{title}%' or cate like '%{title}%' order by write_time desc"
+        print(query_select_item_info)
         curs.execute(query_select_item_info)
         item_infos = curs.fetchall()
 
