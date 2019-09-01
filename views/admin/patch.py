@@ -24,8 +24,9 @@ class Patch(Resource):
         item_infos = curs.fetchone()
         point = item_infos['point']
         uuid = item_infos['status']
+        print(item_infos)
 
-        if uuid == 0 or -1:
+        if uuid == 0 or uuid == -1:
             return {'msg': 'invalid_access'}, 403
 
         query_select_user_info = 'select point from user where uuid = %s'
