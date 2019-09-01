@@ -66,7 +66,7 @@ class Mypage(Resource):
             query_update_user_info += f"name = '{name}', "
 
         if change_pw:
-            query_update_user_info += f"change_pw = '{change_pw}', "
+            query_update_user_info += f"pw = '{change_pw}', "
 
         if profile_img:
             query_update_user_info += f"profile_img = '{profile_img}', "
