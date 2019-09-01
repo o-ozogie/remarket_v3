@@ -26,6 +26,9 @@ class Update(Resource):
         if point < item_point:
             return {'msg': 'low_point'}, 403
 
+        query_update_user_point = 'update user set point = point - %s where uuid = %s'
+        curs.execute(query_update_user_point, (item_point, uuid))
+
         query_update_item_info = 'update item set status = %s where item_id = %s'
         curs.execute(query_update_item_info, (uuid, item_id))
         conn.commit()
