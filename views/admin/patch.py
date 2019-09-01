@@ -21,8 +21,12 @@ class Patch(Resource):
 
         query_select_item_info = 'select point, status from item where item_id = %s'
         curs.execute(query_select_item_info, item_id)
-        point = curs.fetchone()['point']
-        uuid = curs.fetchone()['status']
+        item_infos = curs.fetchone()
+        point = item_infos['point']
+        uuid = item_infos['status']
+
+        if uuid == 0 or -1:
+            return {'msg': 'invalid_access'}, 403
 
         query_select_user_info = 'select point from user where uuid = %s'
         curs.execute(query_select_user_info, uuid)
