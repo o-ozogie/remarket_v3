@@ -84,8 +84,8 @@ class Mypage(Resource):
         except KeyError or TypeError:
             return {'msg': 'valueless'}, 400
 
-        query_update_item_info = 'update item set status = 0 where item_id = %s and uuid = %s'
-        curs.execute(query_update_item_info, (item_id, uuid))
+        query_update_item_info = 'update item set status = 0 where item_id = %s'
+        curs.execute(query_update_item_info, item_id)
         conn.commit()
 
         return {'msg': 'success'}, 200
