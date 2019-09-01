@@ -79,7 +79,6 @@ class Mypage(Resource):
 
     def post(self):
         try:
-            uuid = request.json['uuid']
             item_id = request.json['item_id']
         except KeyError or TypeError:
             return {'msg': 'valueless'}, 400
